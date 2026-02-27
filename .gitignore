@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Tests and coverage reports
+.coverage
+htmlcov/
+coverage.xml
+
+# Virtual environments
+.venv
+
+# Environment variables
+.env
+
+# Temp files
+.DS_Store
+*.log
+
+# Output files
+resources/output/
