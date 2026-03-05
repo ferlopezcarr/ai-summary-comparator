@@ -142,3 +142,24 @@ The folder [resources/output](resources/output) will contain the generated summa
 
 - Prints the basic and advanced summaries.
 - Prints ROUGE-L and BERTScore F1 for each summary.
+
+## RAG Architecture
+
+The application follows a Retrieval-Augmented Generation (RAG) architecture, where:
+
+1. The article is loaded and split into chunks.
+2. The chunks are embedded and stored in a vector database (Chroma).
+3. The LLM retrieves relevant chunks to generate summaries.
+This architecture allows the LLM to access specific information from the article, improving the quality of the generated summaries.
+
+Documents (PDF / TXT)
+↓
+Embeddings (local model)
+↓
+Vector database (Chroma)
+↓
+Retriever
+↓
+Local LLM (LM Studio)
+↓
+Document query chat

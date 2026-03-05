@@ -1,13 +1,23 @@
 import os
-
 from openai import OpenAI
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_community.document_loaders import TextLoader, PyPDFLoader
+from langchain_chroma import Chroma
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
 from requests.exceptions import RequestException
+
+from src.infrastructure.inbound.article_file_service import get_input_file_path
+from src.application.services.prompt_service import get_question_prompt
+
 
 LLM_MODE = os.getenv("LLM_MODE", "local").strip().lower()
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", "").strip()
 LLM_MODEL_NAME = os.getenv("LLM_MODEL_NAME", "").strip()
 LLM_API_KEY = os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY")
+EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "").strip()
 
 def _resolve_env():
     mode = LLM_MODE
@@ -46,6 +56,12 @@ local_llm = ChatOpenAI(
     api_key=lambda: EFFECTIVE_API_KEY,
 )
 
+embedding_model = OpenAIEmbeddings(
+    base_url=LLM_BASE_URL,
+    model=EMBEDDING_MODEL_NAME,
+    api_key=lambda: EFFECTIVE_API_KEY,
+    check_embedding_ctx_length=False
+)
 
 def message(prompt: str, role: str = "user", temperature: float = 0.3) -> str:
     try:
@@ -68,3 +84,20 @@ def message(prompt: str, role: str = "user", temperature: float = 0.3) -> str:
         raise RuntimeError("Error: no content returned by the LLM response.")
 
     return msg.content
+
+def generate_embedding_db(filename: str):
+    """Load a document, split into chunks, embed and store in an in-memory Chroma vector store.
+
+    Returns the created vectorstore instance.
+    """
+
+def ask_question(question: str, vector_db: Chroma | None) -> str:
+    """Run a retrieval-augmented QA over the provided vector store.
+
+    Returns the LLM-generated answer as a string.
+    """
+    if vector_db is None:
+        raise ValueError("vector_db is required")
+
+    # Return an empty string for now, as the RAG implementation is not complete yet
+    return ""

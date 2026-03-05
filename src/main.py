@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from src.infrastructure.inbound.article_file_service import read_resource, save_resource
-from src.infrastructure.outbound.llm_rest_api import message
+from src.infrastructure.outbound.llm_rest_api import ask_question, generate_embedding_db, message
 from src.application.services.prompt_service import get_basic_prompt, get_advanced_prompt
 from src.application.services.score_service import calculate_rouge_score, calculate_bert_score
 
@@ -48,6 +48,21 @@ def main():
     print("\n----------- BERTScore F1 -----------")
     print("Basic:", round(F1_basic.mean().item(), 4))
     print("Advanced:", round(F1_adv.mean().item(), 4))
+
+    filename = input("\nEnter the filename of the article to ask questions about (default: article.pdf): ")
+    if not filename.strip():
+        filename = "article.pdf"
+    
+    vector_db = generate_embedding_db(filename)
+
+    while True:
+        user_input = input("\nEnter a question about the article (or 'exit' to quit): ")
+        if user_input.lower() == "exit":
+            print("Exiting the AI Summary Comparator. Goodbye!")
+            break
+        response = ask_question(user_input, vector_db)
+        print("\nAI Response:")
+        print(response)
 
     print("\n==========================================")
 
