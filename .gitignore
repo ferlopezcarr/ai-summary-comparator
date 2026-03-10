@@ -21,5 +21,8 @@ coverage.xml
 .DS_Store
 *.log
 
+# Input files
+resources/input/
+
 # Output files
 resources/output/

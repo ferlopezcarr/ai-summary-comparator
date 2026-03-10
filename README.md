@@ -14,8 +14,8 @@ Compare two LLM-generated summaries of a biomedical article and score them with 
 ### 1. Create and activate a virtual environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\bin\activate.bat
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\Activate.ps1
 ```
 
 ### 2. Install dependencies
@@ -41,6 +41,14 @@ pip install -e . # If pip is not in PATH: python -m pip install -e .
 - Adjust the prompts as needed for your specific use case or to improve summary quality.
 
 ## Run
+
+### 1. Activate the virtual environment if not already active
+
+```bash
+source .venv/bin/activate  # On Windows: .venv\Scripts\Activate.ps1
+```
+
+### 2. Run the main script
 
 Use module mode so imports resolve correctly:
 
