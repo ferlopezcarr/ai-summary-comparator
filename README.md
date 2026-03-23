@@ -43,7 +43,7 @@ pip install -e . # If pip is not in PATH: python -m pip install -e .
 
 It is up to the user to decide whether to choose a local LLM model via LM Studio or an online model (e.g., ChatGPT).
 
-#### Option 1: LM Studio setup
+#### Option 1: Local LM Studio setup
 
 - Install LM Studio from https://lmstudio.ai/ and follow the instructions to set it up locally.
 
@@ -57,9 +57,10 @@ It is up to the user to decide whether to choose a local LLM model via LM Studio
 
 - Create a `.env` file next to the `main.py` file (you can copy the .env.example) with your **local endpoint URL** or model details if they differ.
 
-Example .env content:
+Example `.env` content for local mode:
 
-```.env
+```env
+LLM_MODE = "local"
 LLM_BASE_URL = "http://192.168.1.154:1234/v1" # The default client points to LM Studio at this address, change if your setup differs
 LLM_MODEL_NAME = "openai/gpt-oss-20b"  # Can be emtpy if there's only one model loaded
 LLM_API_KEY = ""  # Can be any string, as the API key is not required for this local setup
@@ -72,7 +73,7 @@ OUTPUT_DIR = "${RESOURCE_DIR}/output"
 > [!NOTE]  
 > The **local endpoint URL** should be used in OpenAI API compatibility mode, so the URL should point to the **OpenAI-compatible endpoint** (ending in `/v1`) (e.g., [http://192.168.1.154:1234/**v1**](http://192.168.1.154:1234/v1)).
 
-#### Option 2: Online LLM setup (e.g., ChatGPT)
+#### Option 2: Online OpenAI-compatible setup
 
 - If you want to use an online LLM (e.g., ChatGPT), ensure you have access to the API and obtain your API key.
 
@@ -85,10 +86,12 @@ OUTPUT_DIR = "${RESOURCE_DIR}/output"
 
 - Update the `.env` file with the appropriate values for `LLM_BASE_URL`, `LLM_MODEL_NAME`, and `LLM_API_KEY` for your chosen online LLM.
 
-  ```.env
-  LLM_BASE_URL = "https://api.openai.com/v1" # For online LLMs, this should be the API base URL (e.g., https://api.openai.com/v1)
+  ```env
+  LLM_MODE = "online"
+  # Optional; if unset, the default OpenAI URL is used
+  # LLM_BASE_URL = "https://api.openai.com/v1"
   LLM_MODEL_NAME = "gpt-4.1" # The model name to use for the online LLM (e.g., "gpt-4.1" for ChatGPT)
-  LLM_API_KEY = "sdk-proj-XXXXXXXXXXXXXXXX" # Your actual API key for the online LLM
+  LLM_API_KEY = "sdk-XXXXXXXXXXXXXXXX" # Your actual API key for the online LLM
 
   RESOURCE_DIR = "resources"
   INPUT_DIR = "${RESOURCE_DIR}/input"
