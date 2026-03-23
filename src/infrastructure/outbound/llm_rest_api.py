@@ -1,22 +1,8 @@
 import os
-import urllib.parse
 
 from openai import OpenAI
 from langchain_openai import ChatOpenAI
 from requests.exceptions import RequestException
-
-
-def _normalize_base_url(url: str) -> str:
-    if not url:
-        raise ValueError("LLM_BASE_URL must be set in environment (e.g. http://localhost:1234/v1)")
-    url = url.strip().strip('"').strip("'")
-    parsed = urllib.parse.urlparse(url)
-    if not parsed.scheme or not parsed.netloc:
-        raise ValueError(f"Invalid LLM_BASE_URL: {url}")
-    if not url.endswith("/v1"):
-        url = url.rstrip("/") + "/v1"
-    return url
-
 
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", "http://localhost:1234/v1")
 LLM_MODEL_NAME = os.getenv("LLM_MODEL_NAME", "")

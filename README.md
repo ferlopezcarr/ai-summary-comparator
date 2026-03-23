@@ -65,8 +65,8 @@ LLM_MODEL_NAME = "openai/gpt-oss-20b"  # Can be emtpy if there's only one model 
 LLM_API_KEY = ""  # Can be any string, as the API key is not required for this local setup
 
 RESOURCE_DIR = "resources"
-INPUT_DIR = f"{RESOURCE_DIR}/input"
-OUTPUT_DIR = f"{RESOURCE_DIR}/output"
+INPUT_DIR = "${RESOURCE_DIR}/input"
+OUTPUT_DIR = "${RESOURCE_DIR}/output"
 ```
 
 > [!NOTE]  
@@ -91,8 +91,8 @@ OUTPUT_DIR = f"{RESOURCE_DIR}/output"
   LLM_API_KEY = "sdk-proj-XXXXXXXXXXXXXXXX" # Your actual API key for the online LLM
 
   RESOURCE_DIR = "resources"
-  INPUT_DIR = f"{RESOURCE_DIR}/input"
-  OUTPUT_DIR = f"{RESOURCE_DIR}/output"
+  INPUT_DIR = "${RESOURCE_DIR}/input"
+  OUTPUT_DIR = "${RESOURCE_DIR}/output"
   ```
 
 ### 5. Configure prompts
