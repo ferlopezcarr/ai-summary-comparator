@@ -47,13 +47,17 @@ It is up to the user to decide whether to choose a local LLM model via LM Studio
 
 - Install LM Studio from https://lmstudio.ai/ and follow the instructions to set it up locally.
 
-- Download and load the desired model (e.g. openai/gpt-oss-20b) into LM Studio.
+- Download and load the desired LLM model (e.g. openai/gpt-oss-20b) into LM Studio.
+
+- Download and load the desired embedding model (e.g. text-embedding-nomic-embed-text-v1.5) into LM Studio.
 
 - Ensure LM Studio is running and copy the **local endpoint URL** (default is http://192.168.1.154:1234).
 
-- Ensure that the model is in status "ready" in LM Studio before running the script.
-
 ![LM Studio Config](documents/images/lm_studio_config.png)
+
+- Ensure that **BOTH models** are in status "ready" in LM Studio before running the script.
+
+![LM Studio Models](documents/images/lm_studio_models.png)
 
 - Create a `.env` file next to the `main.py` file (you can copy the .env.example) with your **local endpoint URL** or model details if they differ.
 
@@ -64,6 +68,7 @@ LLM_MODE = "local"
 LLM_BASE_URL = "http://192.168.1.154:1234/v1" # The default client points to LM Studio at this address, change if your setup differs
 LLM_MODEL_NAME = "openai/gpt-oss-20b"  # Can be emtpy if there's only one model loaded
 LLM_API_KEY = ""  # Can be any string, as the API key is not required for this local setup
+EMBEDDING_MODEL_NAME = "text-embedding-nomic-embed-text-v1.5"  # Can be emtpy if there's only one model loaded
 
 RESOURCE_DIR = "resources"
 INPUT_DIR = "${RESOURCE_DIR}/input"
@@ -92,6 +97,7 @@ OUTPUT_DIR = "${RESOURCE_DIR}/output"
   # LLM_BASE_URL = "https://api.openai.com/v1"
   LLM_MODEL_NAME = "gpt-4.1" # The model name to use for the online LLM (e.g., "gpt-4.1" for ChatGPT)
   LLM_API_KEY = "sdk-XXXXXXXXXXXXXXXX" # Your actual API key for the online LLM
+  EMBEDDING_MODEL_NAME = "text-embedding-3-small" # The embedding model name to use for the online LLM (e.g., "text-embedding-3-small" for OpenAI embeddings)
 
   RESOURCE_DIR = "resources"
   INPUT_DIR = "${RESOURCE_DIR}/input"
@@ -133,6 +139,7 @@ The `resources` folder will contain the input files and output results. You can 
 
 The folder [resources/input](resources/input) contains the input files where you should place:
 
+- The article pdf file in [article.pdf](resources/input/article.pdf).
 - The article text in [article.md](resources/input/article.md).
 - The reference summary in [reference_summary.md](resources/input/reference_summary.md).
 
