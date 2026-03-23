@@ -21,5 +21,4 @@ def get_advanced_prompt(article: str) -> str:
         str: A formatted prompt string with advanced instructions for summary generation.
     """
     return f"""
-
 """

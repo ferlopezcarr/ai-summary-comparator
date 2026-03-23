@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from src.infrastructure.inbound.article_file_service import read_resource, save_resource
 from src.infrastructure.outbound.llm_rest_api import message
 from src.application.services.prompt_service import get_basic_prompt, get_advanced_prompt
@@ -17,12 +20,12 @@ if not basic_summary or not advanced_summary:
     exit(1)
 
 # Evaluate summaries using ROUGE-L
-rouge_basic = calculate_rouge_score(article, basic_summary)
-rouge_advanced = calculate_rouge_score(article, advanced_summary)
+rouge_basic = calculate_rouge_score(reference_summary, basic_summary)
+rouge_advanced = calculate_rouge_score(reference_summary, advanced_summary)
 
 # Evaluate summaries using BERTScore
-P_basic, R_basic, F1_basic = calculate_bert_score(article, basic_summary)
-P_adv, R_adv, F1_adv = calculate_bert_score(article, advanced_summary)
+P_basic, R_basic, F1_basic = calculate_bert_score(reference_summary, basic_summary)
+P_adv, R_adv, F1_adv = calculate_bert_score(reference_summary, advanced_summary)
 
 def main():
     print("\n==========================================")
