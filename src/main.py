@@ -6,6 +6,8 @@ from src.infrastructure.outbound.llm_rest_api import message
 from src.application.services.prompt_service import get_basic_prompt, get_advanced_prompt
 from src.application.services.score_service import calculate_rouge_score, calculate_bert_score
 
+language = "en"  # Set the language for evaluation (e.g., "en" for English)
+
 article = read_resource("article.md")
 reference_summary = read_resource("reference_summary.md")
 
@@ -25,7 +27,7 @@ rouge_advanced = calculate_rouge_score(reference_summary, advanced_summary)
 
 # Evaluate summaries using BERTScore
 P_basic, R_basic, F1_basic = calculate_bert_score(reference_summary, basic_summary)
-P_adv, R_adv, F1_adv = calculate_bert_score(reference_summary, advanced_summary)
+P_adv, R_adv, F1_adv = calculate_bert_score(reference_summary, advanced_summary, language)
 
 def main():
     print("\n==========================================")

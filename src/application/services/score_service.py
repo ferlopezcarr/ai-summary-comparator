@@ -9,9 +9,9 @@ scorer = rouge_scorer.RougeScorer(
 def calculate_rouge_score(reference_summary: str, summary: str) -> dict:
     return scorer.score(reference_summary, summary)
 
-def calculate_bert_score(reference_summary: str, summary: str, lang:str = "es") -> tuple:
+def calculate_bert_score(reference_summary: str, summary: str, language :str = "es") -> tuple:
     return bert_scorer(
         [summary],
         [reference_summary],
-        lang = lang
+        lang = language
     )
