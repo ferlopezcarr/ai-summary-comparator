@@ -26,7 +26,13 @@ def _resolve_env():
 
     if mode == "local":
         base_url = LLM_BASE_URL
-        api_key = LLM_API_KEY or None
+        if LLM_API_KEY:
+            api_key = LLM_API_KEY
+        else:
+            # LM Studio/local OpenAI-compatible endpoints often do not require an API key.
+            # The OpenAI SDK still requires a non-empty value, so use a dummy placeholder.
+            api_key = ""
+            print("LLM_MODE=local and no LLM_API_KEY set; using placeholder API key for OpenAI client")
     else:  # online
         api_key = LLM_API_KEY
         if not api_key:
