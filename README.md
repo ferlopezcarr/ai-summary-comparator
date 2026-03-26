@@ -59,7 +59,7 @@ It is up to the user to decide whether to choose a local LLM model via LM Studio
 
 ![LM Studio Models](documents/images/lm_studio_models.png)
 
-- Create a `.env` file next to the `main.py` file (you can copy the .env.example) with your **local endpoint URL** or model details if they differ.
+- Create a `.env` file next to the `main.py` file (you can copy the .env.local-example) with your **local endpoint URL** or model details if they differ.
 
 Example `.env` content for local mode:
 
@@ -85,11 +85,11 @@ OUTPUT_DIR = "${RESOURCE_DIR}/output"
   For ChatGPT, you can sign up for API access at https://platform.openai.com/signup and create an API key in the dashboard.
   ![Create ChatGPT API Key](documents/images/create_chatgpt_api_key.png)
 
-  Then you need to copy the API key and add it to the `.env` file along with the appropriate base URL and model name for the online LLM.
+  Then you need to copy the API key and add it to the `.env` file (next step) along with the appropriate base URL and model name for the online LLM.
   
   ![Get ChatGPT API Key](documents/images/get_chatgpt_api_key.png)
 
-- Update the `.env` file with the appropriate values for `LLM_BASE_URL`, `LLM_MODEL_NAME`, and `LLM_API_KEY` for your chosen online LLM.
+- Create a `.env` file next to the `main.py` file (you can copy the .env.online-example) updating the values for `LLM_MODEL_NAME`, and `LLM_API_KEY` (`LLM_BASE_URL` only if needed) for your chosen online LLM.
 
   ```env
   LLM_MODE = "online"
